@@ -1,31 +1,31 @@
-let enterBtn = document.querySelector("#enter-number-btn");
 let forsatDiv = document.querySelector(".forsat");
-let startMsg = document.querySelector("#start-message");
 let guessNum = document.querySelector("#guess-num");
-let leftGuess = document.querySelector("#left-guess");
-let secretItem = document.querySelector("input");
-let leftNumber = document.querySelector("#left-number")
+let guessForm = document.querySelector("#guess-form");
+let startMsg = document.querySelector("#start-message");
 let inputItem = document.createElement("input")
+let enterBtn = document.querySelector("#enter-number-btn");
+let leftGuess = document.querySelector("#left-guess");
+let secretItem = document.querySelector("#secret");
+let leftNumber = document.querySelector("#left-number")
 inputItem.type = "text";
 let guessBtn = document.createElement("button");
 guessBtn.innerText = "guess"
 let guessContent = document.querySelector("#guess-content");
-let guessForm = document.querySelector("#guess-form");
 let Winner = document.querySelector("#win");
 let loser = document.querySelector("#lose");
 
-console.log(guessForm.children)
 
-let clickedNum = 0;
-let startNum = 10;
+
+// let clickedNum = 0;
+// let startNum = 10;
 let leftToClick;
 let receivedNum;
 
 enterBtn.addEventListener("click", (e)=>{
-    clickedNum++
+    // clickedNum++
     receivedNum = secretItem.value;
-    console.log(receivedNum)
-    leftToClick = startNum - clickedNum;
+    // console.log(receivedNum)
+    leftToClick = Math.floor(Math.log2(receivedNum) + 1)
     forsatDiv.style.display = "block"
     leftGuess.style.display = "block"
     startMsg.style.display = "none"
@@ -44,16 +44,16 @@ guessBtn.addEventListener("click", (e)=>{
         Winner.style.display = "block";
 
     }else if(inputItem.value> receivedNum){
-        guessContent.innerHTML += `<span class="blue"> ${inputItem.value}</span>`
+        guessContent.innerHTML += `<span class="red"> ${inputItem.value}</span>`
         inputItem.value= "";
         inputItem.focus();
     }else{
-        guessContent.innerHTML += `<span class="red"> ${inputItem.value}</span>`
+        guessContent.innerHTML += `<span class="blue"> ${inputItem.value}</span>`
         inputItem.value= "";
         inputItem.focus();
     }
 
-    if(leftToClick > 0){
+    if(leftToClick > 1){
         leftToClick--
         guessNum.textContent =  leftToClick;
     }else{
